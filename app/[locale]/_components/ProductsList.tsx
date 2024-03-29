@@ -8,8 +8,8 @@ function ProductsList({}: Props) {
     <section>
       {Array(12)
         .fill("")
-        ?.map((card) => (
-          <ProductCard />
+        ?.map((card, i) => (
+          <ProductCard key={i} />
         ))}
     </section>
   );

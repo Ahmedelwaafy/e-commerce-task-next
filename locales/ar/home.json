@@ -4,6 +4,7 @@
   "title": "جميع منتجات القهوة",
   "your_cart": "السلة",
   "cart_items": "لديك {{count, number}} منتجات في السلة",
+  "count_formatted": "{{count, number}}",
 
   "banner": {
     "txt": "عروض عيد الحب! ",

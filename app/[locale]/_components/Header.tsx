@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 type Props = {};
 
 function Header({}: Props) {
-  const AuthState = useContextState();
+  const CartCount = useContextState();
   const { t } = useTranslation("");
   return (
     <header>
@@ -26,16 +26,18 @@ function Header({}: Props) {
             <Image
               alt="cart"
               src={"/assets/cart/cart.svg"}
-              className=" "
               width={34}
               height={32}
             />
+            <span className="absolute -top-3 -left-3 bg-[#163300] size-9 flex-center rounded-full text-white font-medium">
+              {t("count_formatted", { count: CartCount })}
+            </span>
           </SheetTrigger>
-          <SheetContent>
+          <SheetContent className="w-80 ">
             <SheetHeader>
               <SheetTitle>{t("your_cart")}</SheetTitle>
-              <SheetDescription>
-                {t("cart_items", { count: 14586 })}
+              <SheetDescription className="text-foreground">
+                {t("cart_items", { count: CartCount })}
               </SheetDescription>
             </SheetHeader>
           </SheetContent>
