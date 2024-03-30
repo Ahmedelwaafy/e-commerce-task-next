@@ -12,7 +12,7 @@ export const fetcherFunction = async ({
   keyword: string;
 }) => {
   const options = {
-    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    url: `https://woosonicpwa.com/MitchAPI/filter.php`,
     method: "POST",
     headers: { "Content-Type": "application/json" },
     data: {
