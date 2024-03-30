@@ -1,10 +1,10 @@
 "use client";
 import { IProductCardData } from "@/types";
 import ProductCard from "./ProductCard";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import ErrorMessage from "./ErrorMessage";
 import NoItemsMessage from "./NoItemsMessage";
 import ProductCardSkeleton from "./ProductCardSkeleton";
@@ -15,6 +15,7 @@ type Props = {};
 function ProductsList({}: Props) {
   const searchParams = useSearchParams();
   const { t, i18n } = useTranslation("");
+  const queryClient = useQueryClient();
 
   const fetcherFunction = async ({ pageParam }: { pageParam: number }) => {
     const options = {
@@ -24,7 +25,7 @@ function ProductsList({}: Props) {
       data: {
         category: searchParams.get("category") || "",
         price_range: [0, 100000000],
-        products_per_page: 12,
+        products_per_page: 3,
         page: pageParam,
         sort: {
           criteria: "date",
@@ -45,7 +46,9 @@ function ProductsList({}: Props) {
     isPaused,
     fetchNextPage,
     hasNextPage,
+    isFetchingNextPage,
     isFetching,
+    isRefetching,
     isPending,
     refetch,
   } = useInfiniteQuery({
@@ -55,7 +58,7 @@ function ProductsList({}: Props) {
         pageParam,
       }),
     getNextPageParam: (lastPage, pages) => {
-      if (lastPage?.length > 11) {
+      if (lastPage?.length > 2) {
         return pages?.length + 1;
       } else return undefined;
     },
@@ -63,43 +66,54 @@ function ProductsList({}: Props) {
     refetchOnWindowFocus: false,
   });
   useEffect(() => {
+    /* queryClient.setQueryData(["Products"], (data) => ({
+      pages: [],
+      pageParams: [1],
+    })); */
+    queryClient.clear();
     refetch();
-  }, [refetch, searchParams]);
-  const ProductsData: IProductCardData[] = useMemo(() => {
+  }, [queryClient, refetch, searchParams]);
+  /* const ProductsData: IProductCardData[] = useMemo(() => {
+    console.log("datas", data);
+
     return data?.pages.reduce(
       (acc: IProductCardData[], page: IProductCardData[]) => {
         return [...acc, ...page];
       },
       []
     );
-  }, [data]);
+  }, [data]); */
   return (
     <section className="w-full flex-col-center mt-9">
       <div className="w-full grid grid-cols-auto_repeat gap-x-6 gap-y-12">
         {isError || isPaused ? (
           <ErrorMessage message={t("ErrorMessage")} />
-        ) : isPending ? (
+        ) : isPending || isRefetching ? (
           Array(12)
             .fill("")
             .map((_, i) => <ProductCardSkeleton key={i} />)
-        ) : ProductsData?.length === 0 ? (
+        ) : data?.pages?.length === 0 ? (
           <NoItemsMessage message={t("NoItemsMessage")} />
         ) : (
-          ProductsData?.map(
-            (card: IProductCardData, index: number) =>
-              card?.status === "publish" && (
-                <ProductCard
-                  key={card?.id}
-                  card={card}
-                  lng={i18n.language}
-                  index={index}
-                />
-              )
-          )
+          data?.pages?.map((group, i) => (
+            <React.Fragment key={i}>
+              {group?.map(
+                (card: IProductCardData, index: number) =>
+                  card?.status === "publish" && (
+                    <ProductCard
+                      key={card?.id}
+                      card={card}
+                      lng={i18n.language}
+                      index={index}
+                    />
+                  )
+              )}
+            </React.Fragment>
+          ))
         )}
       </div>
 
-      {isFetching && (
+      {isFetchingNextPage && (
         <div className="w-full grid grid-cols-auto_repeat gap-x-6 gap-y-12 mt-12">
           {Array(Number(4))
             .fill("")
@@ -109,7 +123,7 @@ function ProductsList({}: Props) {
         </div>
       )}
       <button
-        disabled={isFetching}
+        disabled={isFetchingNextPage}
         className={`mx-auto my-[84px] h-12 w-[136px] bg-transparent text-[#163300] border-[#868685] hover:text-white hover:bg-[#163300] disabled:opacity-50 border-2 trns disabled:cursor-not-allowed flex-center text-xl font-medium rounded-full`}
         onClick={fetchNextPage}
       >
