@@ -4,15 +4,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "demo.dashboard.lanacrm.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "plus.unsplash.com",
+        hostname: "woosonicpwa.com",
       },
     ],
   },

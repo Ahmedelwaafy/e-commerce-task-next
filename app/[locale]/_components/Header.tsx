@@ -9,32 +9,27 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { TFunction } from "i18next";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
-
+import SearchInput from "./SearchInput";
+import LanguageChanger from "./LanguageChanger";
 type Props = {};
 
 function Header({}: Props) {
   const CartCount = useContextState();
   const { t } = useTranslation("");
   return (
-    <header>
-      <nav className="w-full items-center justify-between gap-5">
+    <header className="pt-[40px] ">
+      <nav className="w-full flex items-center justify-between rtl:flex-row-reverse  gap-5">
         <Sheet>
-          <SheetTrigger className="flex-center size-[60px] rounded-full bg-accent relative">
-            <Image
-              alt="cart"
-              src={"/assets/cart/cart.svg"}
-              width={34}
-              height={32}
-            />
-            <span className="absolute -top-3 -left-3 bg-[#163300] size-9 flex-center rounded-full text-white font-medium">
+          <SheetTrigger className="flex-center size-[40px] shrink-0 rounded-full bg-accent relative">
+            <Image alt="cart" src={"/assets/cart.svg"} width={20} height={18} />
+            <span className="absolute -top-1.5 -left-1.5 text-xs bg-[#163300] size-5 flex-center rounded-full text-white font-medium pt-0.5">
               {t("count_formatted", { count: CartCount })}
             </span>
           </SheetTrigger>
           <SheetContent className="w-80 ">
-            <SheetHeader>
+            <SheetHeader className="grow flex-col-center h-full">
               <SheetTitle>{t("your_cart")}</SheetTitle>
               <SheetDescription className="text-foreground">
                 {t("cart_items", { count: CartCount })}
@@ -42,6 +37,8 @@ function Header({}: Props) {
             </SheetHeader>
           </SheetContent>
         </Sheet>
+        <SearchInput t={t} />
+        <LanguageChanger t={t} />
       </nav>
     </header>
   );

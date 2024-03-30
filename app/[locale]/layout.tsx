@@ -8,6 +8,7 @@ import { dir } from "i18next";
 import initTranslations from "../i18n";
 import { Poppins, Baloo_Bhaijaan_2 } from "next/font/google";
 import { ContextProvider } from "@/Providers/ContextProvider";
+import TanstackProvider from "@/Providers/TanstackProvider";
 
 export const metadata: Metadata = {
   title: "Hotel Booking",
@@ -46,6 +47,7 @@ export default async function RootLayout({
         } `}
       >
         <ContextProvider>
+        <TanstackProvider>
           <ClientComponentsTranslationsProvider
             namespaces={i18nNamespaces}
             locale={locale}
@@ -54,6 +56,7 @@ export default async function RootLayout({
             {children}
             <Toaster />
           </ClientComponentsTranslationsProvider>
+        </TanstackProvider>
         </ContextProvider>
       </body>
     </html>

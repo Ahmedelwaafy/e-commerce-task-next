@@ -10,20 +10,18 @@ const Breadcrumbs = ({
   t: TFunction;
 }) => {
   return (
-    <nav aria-label="breadcrumb" className="shadow-sm text-[#185039]">
-      <ul className="breadcrumb flex justify-start gap-1 items-center ">
+    <nav aria-label="breadcrumb" className=" text-[#185039] ">
+      <ul className="breadcrumb flex justify-start gap-1.5 items-center h-20 font-medium ">
         <li className="breadcrumb-item">
-          <Link href="">
-            {t("home")}{" "}
-            <Image
-              className="inline-block ltr:rotate-180"
-              alt="chevron"
-              src={"/assets/chevron.svg"}
-              width={12}
-              height={7}
-            />
-          </Link>
+          <Link href="">{t("home")} </Link>
         </li>
+        <Image
+          className="inline-block ltr:rotate-180 pointer-events-none"
+          alt="chevron"
+          src={"/assets/chevron.svg"}
+          width={9}
+          height={7}
+        />
         {pathnames.map((pathname, index) => {
           const routeTo = `/${pathnames.slice(1, index + 1).join("/")}`;
           const isLast = index === pathnames.length - 1;
@@ -43,10 +41,10 @@ const Breadcrumbs = ({
                 <Link href={routeTo}>
                   {pathname?.replace(/-/g, " ")}{" "}
                   <Image
-                    className="inline-block ltr:rotate-180"
+                    className="inline-block ltr:rotate-180 pointer-events-none"
                     alt="chevron"
                     src={"/assets/chevron.svg"}
-                    width={12}
+                    width={9}
                     height={7}
                   />{" "}
                 </Link>
