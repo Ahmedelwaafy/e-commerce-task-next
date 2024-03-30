@@ -47,8 +47,8 @@ export default function LanguageChanger({ t }: { t: TFunction }) {
         <SelectValue placeholder={t("language")} />
       </SelectTrigger>
       <SelectContent  position="popper" sideOffset={5}>
-        <SelectItem value="en">English</SelectItem>
-        <SelectItem value="ar">العربية</SelectItem>
+        <SelectItem className="cursor-pointer" value="en">English</SelectItem>
+        <SelectItem className="cursor-pointer" value="ar">العربية</SelectItem>
       </SelectContent>
     </Select>
   );

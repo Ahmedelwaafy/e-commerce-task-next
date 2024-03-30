@@ -1,45 +1,21 @@
 "use client";
+import { fetcherFunction } from "@/actions/fetchData";
 import { IProductCardData } from "@/types";
-import ProductCard from "./ProductCard";
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import ErrorMessage from "./ErrorMessage";
 import NoItemsMessage from "./NoItemsMessage";
+import ProductCard from "./ProductCard";
 import ProductCardSkeleton from "./ProductCardSkeleton";
-import { useTranslation } from "react-i18next";
 
-type Props = {};
-
-function ProductsList({}: Props) {
+function ProductsList() {
   const searchParams = useSearchParams();
   const { t, i18n } = useTranslation("");
   const queryClient = useQueryClient();
+  const isInitialMount = useRef(true);
 
-  const fetcherFunction = async ({ pageParam }: { pageParam: number }) => {
-    const options = {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      data: {
-        category: searchParams.get("category") || "",
-        price_range: [0, 100000000],
-        products_per_page: 3,
-        page: pageParam,
-        sort: {
-          criteria: "date",
-          arrangement: "DESC",
-        },
-        keyword: searchParams.get("q") || "",
-      },
-    };
-
-    const res = await axios(options);
-    console.log("data", data);
-
-    return res.data;
-  };
   const {
     data,
     isError,
@@ -47,7 +23,6 @@ function ProductsList({}: Props) {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    isFetching,
     isRefetching,
     isPending,
     refetch,
@@ -56,33 +31,27 @@ function ProductsList({}: Props) {
     queryFn: ({ pageParam }) =>
       fetcherFunction({
         pageParam,
+        category: searchParams.get("category") || "",
+        keyword: searchParams.get("q")?.replace(/-/g, " ") || "",
       }),
-    getNextPageParam: (lastPage, pages) => {
-      if (lastPage?.length > 2) {
-        return pages?.length + 1;
-      } else return undefined;
+    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+      if (lastPage.length === 0) {
+        return undefined;
+      }
+      return lastPageParam + 1;
     },
     initialPageParam: 1,
     refetchOnWindowFocus: false,
   });
   useEffect(() => {
-    /* queryClient.setQueryData(["Products"], (data) => ({
-      pages: [],
-      pageParams: [1],
-    })); */
-    queryClient.clear();
-    refetch();
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      queryClient.clear();
+      refetch();
+    }
   }, [queryClient, refetch, searchParams]);
-  /* const ProductsData: IProductCardData[] = useMemo(() => {
-    console.log("datas", data);
 
-    return data?.pages.reduce(
-      (acc: IProductCardData[], page: IProductCardData[]) => {
-        return [...acc, ...page];
-      },
-      []
-    );
-  }, [data]); */
   return (
     <section className="w-full flex-col-center mt-9">
       <div className="w-full grid grid-cols-auto_repeat gap-x-6 gap-y-12">
@@ -122,10 +91,15 @@ function ProductsList({}: Props) {
             ))}
         </div>
       )}
+
       <button
         disabled={isFetchingNextPage}
-        className={`mx-auto my-[84px] h-12 w-[136px] bg-transparent text-[#163300] border-[#868685] hover:text-white hover:bg-[#163300] disabled:opacity-50 border-2 trns disabled:cursor-not-allowed flex-center text-xl font-medium rounded-full`}
-        onClick={fetchNextPage}
+        className={`mx-auto my-[84px] h-12 w-[136px] bg-transparent text-[#163300] border-[#868685] hover:text-white hover:bg-[#163300] disabled:opacity-50 border-2 trns disabled:cursor-not-allowed  text-xl font-medium rounded-full ${
+          isError || isPaused || !hasNextPage || data?.pages?.length === 0
+            ? "hidden"
+            : "flex-center"
+        }`}
+        onClick={() => fetchNextPage()}
       >
         {t("CTA_text")}
       </button>

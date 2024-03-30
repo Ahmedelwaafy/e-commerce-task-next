@@ -1,61 +1,21 @@
 {
   "home": "Home",
   "coffee": "Coffee",
-  "title": "All Coffee Products",
-  "banner": {
-    "txt": "Valentine’s Day Offers! Buy Two Get One Free",
-    "cta": "Shop Now",
-    "Contact": "Contact Us",
-    "Track": "Track Order",
-    "Find": "Find A Store"
+  "title": "All coffee products",
+  "your_cart": "Your Cart",
+  "cart_items": "You have {{count, number}} Products in the cart",
+  "count_formatted": "{{count, number}}",
+  "placeholder": "Search..",
+  "language": "the language",
+  "coffees": {
+    "1": "All products",
+    "2": "Baklava",
+    "3": "Ice Cream",
+    "4": "Chocolate",
+    "5": "Oriental Sweets",
+    "6": "Kahk"
   },
-  "Navbar": {
-    "input_placeholder": "Search",
-    "Cart": "Cart",
-    "My_Cart": "My Cart",
-    "empty_Cart": "Your cart is empty, hurry up and add products to your cart now!",
-    "Back": "Back To Store",
-    "Wishlist": "Wishlist",
-    "Login": "Login"
-  },
-  "pathnames": {
-    "Men": "Men",
-    "Clothing": "Clothing",
-    "Tops": "Tops",
-    "Adidas": "Adidas",
-    "name": "Adidas Black T-Shirt"
-  },
-  "ProductShowcase": {
-    "Size": "Size",
-    "Color": "Color",
-    "Quantity": "Quantity",
-    "Add": "Add To Cart",
-    "Pickup": "Pickup From Store"
-  },
-  "SimilarProductS": {
-    "Similar": "Similar Products",
-    "products": "You may like these products also",
-    "Quantity": "Quantity",
-    "Add": "Add To Cart",
-    "Pickup": "Pickup From Store"
-  },
-  "footer": {
-    "lorem_1": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo",
-    "lorem_2": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo",
-    "lorem_3": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo",
-    "Subscribe": "Subscribe to our newsletter",
-    "placeholder": "Enter Your Mail",
-    "Subscribe_btn": "Subscribe",
-    "rights": "yeshtery, all rights reserved.",
-    "Powered": "Powered By",
-    "menu": {
-      "About": "About Us",
-      "Contact": "Contact Us ",
-      "Track": "Track Order",
-      "Terms": "Terms & Conditions ",
-      "Privacy": "Privacy Policy ",
-      "Sell": "Sell With Us ",
-      "Shipping": "Shipping And Returns"
-    }
-  }
+  "ErrorMessage": "An error has occurred, please try again later!",
+  "NoItemsMessage": "No results found!",
+  "CTA_text": "Show more"
 }

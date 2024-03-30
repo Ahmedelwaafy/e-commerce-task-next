@@ -21,9 +21,11 @@ function SearchInput({ t }: Props) {
     if (debouncedValue) {
       push("q", debouncedValue?.replace(/\s/g, "-"));
     } else {
-      DeleteQuery("q");
+      if (searchParams.get("q")) {
+        DeleteQuery("q");
+      }
     }
-  }, [DeleteQuery, debouncedValue, push]);
+  }, [debouncedValue]);
 
   return (
     <div className="relative group">

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-type Props = { className: string; children: React.ReactNode };
+type Props = { className?: string; children: React.ReactNode };
 
 function Container({ className, children }: Props) {
   return (

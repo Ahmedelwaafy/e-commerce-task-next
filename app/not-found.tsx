@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function NotFound() {
@@ -22,16 +21,9 @@ export default function NotFound() {
           >
             OPS, There is No page like you want !
           </h2>
-          <Image
-            style={{ maxWidth: "600px" }}
-            className="max-w-[500px] max-h-[500px]"
-            src="/assets/images/404-img.png"
-            alt="404-img"
-            width={700}
-            height={500}
-          />
-          {/*           <Link href="/">Return Home</Link>
-           */}{" "}
+         
+             <Link href="/">Return Home</Link>
+          
         </div>
       </body>
     </html>

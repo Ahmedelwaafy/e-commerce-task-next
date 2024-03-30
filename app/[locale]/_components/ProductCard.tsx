@@ -23,7 +23,7 @@ function ProductCard({ card, lng, index }: Props) {
         className="img__wrapper bg-muted flex-center h-[300px] relative"
       >
         {card?.availability === "outofstock" && (
-          <span className="absolute top-1 right-1/2 translate-x-1/2 bg-red-500 text-sm leading-4 text-white pt-0.5 px-1.5 rounded-sm">
+          <span className="absolute top-2 right-1/2 translate-x-1/2 bg-red-500 text-sm leading-4 text-white pt-0.5 px-1.5 rounded-sm">
             out of stock{" "}
           </span>
         )}
@@ -45,7 +45,10 @@ function ProductCard({ card, lng, index }: Props) {
         </div>
       </Link>
       <div className="card_details  w-full p-5">
-        <h2 className="text-xl font-medium">
+        <h2
+          title={lng === "ar" ? card?.ar_name : card?.name}
+          className="text-xl font-medium line-clamp-1"
+        >
           {lng === "ar" ? card?.ar_name : card?.name}
         </h2>
         <p className="text-[#777777] rtl:ltr rtl:text-end font-medium">
@@ -77,7 +80,7 @@ function ProductCard({ card, lng, index }: Props) {
           </h5>
         </div>
 
-        <div className="love__cart--actions flex items-center justify- gap-3 tl:ltr rtl:flex-row-reverse mt-5">
+        <div className="love__cart--actions flex items-center justify- gap-3 tl:ltr flex-row-reverse mt-5">
           <button className="size-12 flex-center shrink-0 rounded-full bg-muted">
             <div className="heart-container" title="Like">
               <input
