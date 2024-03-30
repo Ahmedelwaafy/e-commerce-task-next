@@ -1,5 +1,4 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
 
 function ProductCardSkeleton({ className }: { className?: string }) {
   return (
@@ -11,19 +10,18 @@ function ProductCardSkeleton({ className }: { className?: string }) {
         <Skeleton className="w-full h-4" />
         <Skeleton className="w-1/3 h-2 my-3" />
         <Skeleton className="w-1/2 h-3" />
-       
+
         <div
           className={`size__variations flex gap-3 w-full rtl:flex-row-reverse rtl:justify-end  mt-5  `}
         >
-          <Skeleton className="w-[70px] h-11 rounded-xl"/>
-          <Skeleton className="w-[70px] h-11 rounded-xl"/>
-          <Skeleton className="w-[70px] h-11 rounded-xl"/>
-         
+          <Skeleton className="w-[70px] h-11 rounded-xl" />
+          <Skeleton className="w-[70px] h-11 rounded-xl" />
+          <Skeleton className="w-[70px] h-11 rounded-xl" />
         </div>
 
         <div className="love__cart--actions flex items-center justify- gap-3 tl:ltr rtl:flex-row-reverse mt-5">
-          <Skeleton className="size-12 flex-center shrink-0 rounded-full "/>
-          <Skeleton className="grow  rounded-full h-12"/>
+          <Skeleton className="size-12 flex-center shrink-0 rounded-full " />
+          <Skeleton className="grow  rounded-full h-12" />
         </div>
       </div>
     </div>

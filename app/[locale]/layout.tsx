@@ -47,16 +47,16 @@ export default async function RootLayout({
         } `}
       >
         <ContextProvider>
-        <TanstackProvider>
-          <ClientComponentsTranslationsProvider
-            namespaces={i18nNamespaces}
-            locale={locale}
-            resources={resources}
-          >
-            {children}
-            <Toaster />
-          </ClientComponentsTranslationsProvider>
-        </TanstackProvider>
+          <TanstackProvider>
+            <ClientComponentsTranslationsProvider
+              namespaces={i18nNamespaces}
+              locale={locale}
+              resources={resources}
+            >
+              {children}
+              <Toaster />
+            </ClientComponentsTranslationsProvider>
+          </TanstackProvider>
         </ContextProvider>
       </body>
     </html>

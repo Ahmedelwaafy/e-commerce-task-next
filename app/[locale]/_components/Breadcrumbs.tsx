@@ -34,10 +34,8 @@ const Breadcrumbs = ({
               }`}
             >
               {isLast ? (
-                // If it's the last item, display the text without a link
                 pathname?.replace(/-/g, " ")
               ) : (
-                // If it's not the last item, display a link
                 <Link href={routeTo}>
                   {pathname?.replace(/-/g, " ")}{" "}
                   <Image

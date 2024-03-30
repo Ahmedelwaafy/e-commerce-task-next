@@ -85,6 +85,7 @@ const config = {
       bmd: { max: "720px" },
       ss: { max: "650px" },
       sm: { max: "550px" },
+      xs: { max: "400px" },
     },
   },
   plugins: [require("tailwindcss-animate")],

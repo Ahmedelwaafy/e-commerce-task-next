@@ -40,7 +40,7 @@ function SearchInput({ t }: Props) {
       <input
         type="text"
         placeholder={t("placeholder")}
-        className="w-[650px] lg:w-[350px] md:w-[250px]  h-12 rounded-[100px]  border-none outline-none shadow-[0_0_0_1px] shadow-[#163300]  focus:shadow-[0_0_0_2px]  trns px-[72px]"
+        className="w-[650px] lg:w-[350px] md:w-[250px]  xs:w-[200px] h-12 rounded-[100px]  border-none outline-none shadow-[0_0_0_1px] shadow-[#163300]  focus:shadow-[0_0_0_2px]  trns px-[72px]"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />{" "}

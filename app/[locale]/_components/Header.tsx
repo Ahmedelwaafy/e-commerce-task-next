@@ -33,8 +33,6 @@ function Header({}: Props) {
               />
               <span className="absolute -top-1.5 -left-1.5 text-xs bg-[#163300] size-5 flex-center rounded-full text-white font-medium pt-0.5">
                 {CartCount}
-                {/*               {t("count_formatted", { count: CartCount })}
-                 */}{" "}
               </span>
             </SheetTrigger>
             <SheetContent className="w-80 ">
